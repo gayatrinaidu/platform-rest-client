@@ -1,5 +1,5 @@
 /**
- * Copyright © Altimetrik 2016. All rights reserved.
+ * Copyright Â© Altimetrik 2016. All rights reserved.
  *
  * This software is the confidential and proprietary information
  * of Altimetrik. You shall not disclose such Confidential Information
@@ -40,7 +40,7 @@ public class RestTemplateFactoryDefault implements RestTemplateFactoryAbstract {
 	@Override
 	public RestClient makeXML(HttpHeaders headers) {
 		XStreamMarshaller marshaller = new XStreamMarshaller();
-		MarshallingHttpMessageConverter marshallingConverter = new MarshallingHttpMessageConverter(marshaller);
+		final MarshallingHttpMessageConverter marshallingConverter = new MarshallingHttpMessageConverter(marshaller);
 		return new RestClient(new RestTemplate(new ArrayList<HttpMessageConverter<?>>() {
 			private static final long serialVersionUID = 1L;
 			{
