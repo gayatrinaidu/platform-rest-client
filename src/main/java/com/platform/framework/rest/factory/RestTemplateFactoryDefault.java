@@ -1,5 +1,5 @@
 /**
- * Copyright Â© Altimetrik 2016. All rights reserved.
+ * Copyright © Altimetrik 2016. All rights reserved.
  *
  * This software is the confidential and proprietary information
  * of Altimetrik. You shall not disclose such Confidential Information
@@ -10,6 +10,7 @@
 package com.platform.framework.rest.factory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -27,26 +28,21 @@ import com.platform.framework.rest.client.RestClient;
  */
 public class RestTemplateFactoryDefault implements RestTemplateFactoryAbstract {
 
+	private List<HttpMessageConverter<?>> messageConverters = null;
+
 	@Override
 	public RestClient makeJSON(HttpHeaders headers) {
-		return new RestClient(new RestTemplate(new ArrayList<HttpMessageConverter<?>>() {
-			private static final long serialVersionUID = 1L;
-			{
-				add(new MappingJackson2HttpMessageConverter());
-			}
-		}));
+		messageConverters = new ArrayList<>();
+		messageConverters.add(new MappingJackson2HttpMessageConverter());
+		return new RestClient(new RestTemplate(messageConverters));
 	}
 
 	@Override
 	public RestClient makeXML(HttpHeaders headers) {
-		XStreamMarshaller marshaller = new XStreamMarshaller();
-		final MarshallingHttpMessageConverter marshallingConverter = new MarshallingHttpMessageConverter(marshaller);
-		return new RestClient(new RestTemplate(new ArrayList<HttpMessageConverter<?>>() {
-			private static final long serialVersionUID = 1L;
-			{
-				add(marshallingConverter);
-			}
-		}));
+		final MarshallingHttpMessageConverter marshallingConverter = new MarshallingHttpMessageConverter(new XStreamMarshaller());
+		messageConverters = new ArrayList<>();
+		messageConverters.add(marshallingConverter);
+		return new RestClient(new RestTemplate(messageConverters));
 	}
 
 }

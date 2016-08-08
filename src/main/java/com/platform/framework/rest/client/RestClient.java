@@ -68,7 +68,7 @@ public class RestClient {
 	 * @return Entity
 	 */
 	public <T> ResponseEntity<T> getForEntity(Class<T> c, String uri, Object... variables) {
-		HttpEntity<String> entity = new HttpEntity<String>(headers);
+		HttpEntity<String> entity = new HttpEntity<>(headers);
 		return template.exchange(uri, HttpMethod.GET, entity, c, variables);
 	}
 
@@ -81,7 +81,7 @@ public class RestClient {
 	 * @return Entity
 	 */
 	public <T> T getEntity(Class<T> c, String uri, Object... variables) {
-		HttpEntity<String> entity = new HttpEntity<String>(headers);
+		HttpEntity<String> entity = new HttpEntity<>(headers);
 		ResponseEntity<T> response = template.exchange(uri, HttpMethod.GET, entity, c, variables);
 		return response.getBody();
 	}
@@ -95,7 +95,7 @@ public class RestClient {
 	 * @return Entity
 	 */
 	public <T> T postEntity(Class<T> c, String uri, T post) {
-		HttpEntity<String> entity = new HttpEntity<String>(headers);
+		HttpEntity<String> entity = new HttpEntity<>(headers);
 		ResponseEntity<T> response = template.exchange(uri, HttpMethod.POST, entity, c, post);
 		return response.getBody();
 	}
@@ -109,7 +109,7 @@ public class RestClient {
 	 * @return Entity class
 	 */
 	public <T> T putEntity(Class<T> c, String uri, Long id) {
-		HttpEntity<String> entity = new HttpEntity<String>(headers);
+		HttpEntity<String> entity = new HttpEntity<>(headers);
 		ResponseEntity<T> response = template.exchange(uri, HttpMethod.PUT, entity, c, id);
 		return response.getBody();
 	}
