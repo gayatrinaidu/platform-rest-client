@@ -1,5 +1,5 @@
 /**
- * Copyright © Altimetrik 2016. All rights reserved.
+ * Copyright (C) Altimetrik 2016. All rights reserved.
  *
  * This software is the confidential and proprietary information
  * of Altimetrik. You shall not disclose such Confidential Information
