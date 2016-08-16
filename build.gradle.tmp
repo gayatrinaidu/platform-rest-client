@@ -8,27 +8,26 @@
  */
 
 repositories {
-		maven { url 'http://localhost:8880/archiva/repository/internal' }
-		maven { url 'http://localhost:8880/archiva/repository/snapshots' }
+	maven { url 'http://192.168.68.235:8881/archiva/repository/all' }
 }
 
 ext {
-		assertjVersion = '3.4.1'
-		jacksonVersion = '2.6.7'
-		junitVersion = '4.12'
-		log4jVersion = '1.2.17'
-		mockitoVersion = '1.10.19'
-		slf4jVersion = '1.7.21'
-		mockitoVersion = '1.10.19'
-		springVersion = '4.2.7.RELEASE'
-		platformBomVersion = '1.0.0.BUILD-SNAPSHOT'
-		
-		idPrefix = 'framework'
-	}
+	assertjVersion = '3.4.1'
+	jacksonVersion = '2.6.7'
+	junitVersion = '4.12'
+	log4jVersion = '1.2.17'
+	mockitoVersion = '1.10.19'
+	slf4jVersion = '1.7.21'
+	mockitoVersion = '1.10.19'
+	springVersion = '4.2.7.RELEASE'
+	platformBomVersion = '1.0.0.BUILD-SNAPSHOT'
+	
+	idPrefix = 'framework'
+}
 
 
 configurations.all {
-		exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+	exclude group: 'org.slf4j', module: 'slf4j-log4j12'
 }
 
 // Apply the java plugin to add support for Java
