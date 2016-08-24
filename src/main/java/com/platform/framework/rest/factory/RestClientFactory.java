@@ -59,4 +59,12 @@ public final class RestClientFactory {
 
 		return new RestClient();
 	}
+
+	/**
+	 * Instantiate Default RestClient.
+	 * @return RestClient class
+	 */
+	public static RestClient instantiate() {
+		return instantiate(CLIENT_DEFAULT);
+	}
 }
