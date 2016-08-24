@@ -12,22 +12,24 @@ repositories {
 }
 
 ext {
-	assertjVersion = '3.4.1'
-	jacksonVersion = '2.6.7'
-	junitVersion = '4.12'
-	log4jVersion = '1.2.17'
-	mockitoVersion = '1.10.19'
-	slf4jVersion = '1.7.21'
-	mockitoVersion = '1.10.19'
-	springVersion = '4.2.7.RELEASE'
-	platformBomVersion = '1.0.0.BUILD-SNAPSHOT'
-	
-	idPrefix = 'framework'
-}
+		assertjVersion = '3.4.1'
+		jacksonVersion = '2.8.1'
+		junitVersion = '4.12'
+		log4jVersion = '1.2.17'
+		mockitoVersion = '1.10.19'
+		slf4jVersion = '1.7.21'
+		mockitoVersion = '1.10.19'
+		springVersion = '4.2.7.RELEASE'
+		platformBomVersion = '1.0.0.BUILD-SNAPSHOT'
+		
+		idPrefix = 'framework'
+	}
 
 
 configurations.all {
 	exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+ 	resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
 }
 
 // Apply the java plugin to add support for Java
@@ -40,6 +42,8 @@ description = 'Platform Rest Client'
 dependencies {
 	compile "org.springframework:spring-web:$springVersion"
 	compile "org.springframework:spring-oxm:$springVersion"
+	compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+	compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
    	testCompile "org.springframework:spring-test:$springVersion"
 	testCompile "org.mockito:mockito-all:$mockitoVersion"    	
    	testCompile "junit:junit:$junitVersion"

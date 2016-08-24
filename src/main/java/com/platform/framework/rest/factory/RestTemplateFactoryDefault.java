@@ -22,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import com.platform.framework.rest.client.RestClient;
 
 /**
- * Default Factory Implementatipn for RestClientFactory.
+ * Default Factory Implimentatipn for RestClientFactory.
  * @author Harish Mangala
  *
  */
@@ -34,7 +34,7 @@ public class RestTemplateFactoryDefault implements RestTemplateFactoryAbstract {
 	public RestClient makeJSON(HttpHeaders headers) {
 		messageConverters = new ArrayList<>();
 		messageConverters.add(new MappingJackson2HttpMessageConverter());
-		return new RestClient(new RestTemplate(messageConverters));
+		return new RestClient(new RestTemplate(messageConverters), headers);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class RestTemplateFactoryDefault implements RestTemplateFactoryAbstract {
 		final MarshallingHttpMessageConverter marshallingConverter = new MarshallingHttpMessageConverter(new XStreamMarshaller());
 		messageConverters = new ArrayList<>();
 		messageConverters.add(marshallingConverter);
-		return new RestClient(new RestTemplate(messageConverters));
+		return new RestClient(new RestTemplate(messageConverters), headers);
 	}
 
 }
