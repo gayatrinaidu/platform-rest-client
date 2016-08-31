@@ -10,13 +10,18 @@
 package com.platform.framework.rest.client;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * RestClient class.
@@ -81,12 +86,40 @@ public class RestClient {
 	 * @param variables request parameters
 	 * @return Entity
 	 */
-	public <T> T getEntity(Class<T> c, String uri, Object... variables) {
+	/*public <T> T getEntity(Class<T> c, String uri, Object... variables) {
 		HttpEntity<String> entity = new HttpEntity<>(headers);
 		ResponseEntity<T> response = template.exchange(uri, HttpMethod.GET, entity, c, variables);
 		return response.getBody();
+	} */
+
+	
+	public <T> T getEntity(Class<T> c, String uri, Map<String, String> params) {
+		HttpEntity<String> entity = new HttpEntity<>(headers);
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri);
+		Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
+		while(iterator.hasNext()) {
+			Entry<String, String> param = iterator.next();
+		    builder.queryParam(param.getKey(), param.getValue());
+
+		}
+		ResponseEntity<T> response = template.exchange(builder.build().toUri().toString(), HttpMethod.GET, entity, c);
+		return response.getBody();
 	}
 
+	
+	public <T> T getEntityList(ParameterizedTypeReference<T> c, String uri, Map<String, Object> params) {
+		HttpEntity<String> entity = new HttpEntity<>(headers);
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri);
+		Iterator<Entry<String, Object>> iterator = params.entrySet().iterator();
+		while(iterator.hasNext()) {
+			Entry<String, Object> param = iterator.next();
+		    builder.queryParam(param.getKey(), param.getValue());
+
+		}
+		ResponseEntity<T> response = template.exchange(builder.build().toUri().toString(), HttpMethod.GET, entity, c);
+		return response.getBody();
+	}
+	
 	/**
 	 * Post Entity.
 	 * @param <T> template

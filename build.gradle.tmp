@@ -44,6 +44,7 @@ dependencies {
 	compile "org.springframework:spring-oxm:$springVersion"
 	compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
 	compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+	compile 'org.springframework.hateoas:spring-hateoas:0.20.0.RELEASE'
    	testCompile "org.springframework:spring-test:$springVersion"
 	testCompile "org.mockito:mockito-all:$mockitoVersion"    	
    	testCompile "junit:junit:$junitVersion"
